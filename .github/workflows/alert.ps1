@@ -1,7 +1,8 @@
-$downloadUrl = "https://github.com/tsunamods-codes/7th-Heaven/releases/latest"
+$repoUrl = "https://github.com/$env:GITHUB_REPOSITORY"
+$downloadUrl = "${repoUrl}/releases/latest"
 
 if ($env:_IS_BUILD_CANARY -eq "true") {
-  $downloadUrl = "https://github.com/tsunamods-codes/7th-Heaven/releases/tag/canary"
+  $downloadUrl = "${repoUrl}/releases/tag/canary"
 }
 
 # Initial template from https://discohook.org/
@@ -25,6 +26,12 @@ $discordPost = @"
 }
 "@
 
-Invoke-RestMethod -Uri $env:_MAP_7TH_INTERNAL -ContentType "application/json" -Method Post -Body $discordPost
-Invoke-RestMethod -Uri $env:_MAP_7TH_QHIMM -ContentType "application/json" -Method Post -Body $discordPost
-Invoke-RestMethod -Uri $env:_MAP_7TH_TSUNAMODS -ContentType "application/json" -Method Post -Body $discordPost
+if ($env:_MAP_7TH_INTERNAL) {
+  Invoke-RestMethod -Uri $env:_MAP_7TH_INTERNAL -ContentType "application/json" -Method Post -Body $discordPost
+}
+if ($env:_MAP_7TH_QHIMM) {
+  Invoke-RestMethod -Uri $env:_MAP_7TH_QHIMM -ContentType "application/json" -Method Post -Body $discordPost
+}
+if ($env:_MAP_7TH_TSUNAMODS) {
+  Invoke-RestMethod -Uri $env:_MAP_7TH_TSUNAMODS -ContentType "application/json" -Method Post -Body $discordPost
+}
