@@ -33,6 +33,8 @@ jobs:
   CICD:
     runs-on: windows-latest
     timeout-minutes: 1440
+    permissions:
+      contents: write
     strategy:
       max-parallel: 1
     steps:
