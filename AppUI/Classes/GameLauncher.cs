@@ -222,12 +222,12 @@ namespace AppUI.Classes
             ReShadeUpdater.Cleanup();
 
             Instance.RaiseProgressChanged(ResourceHelper.Get(StringKey.VerifyingInstalledGameIsCompatible));
-            if (converter.IsGamePirated())
-            {
-                Instance.RaiseProgressChanged(ResourceHelper.Get(StringKey.ErrorCodeYarr), NLog.LogLevel.Error);
-                Logger.Info(FileUtils.ListAllFiles(converter.InstallPath));
-                return false;
-            }
+            // if (converter.IsGamePirated())
+            // {
+            //     Instance.RaiseProgressChanged(ResourceHelper.Get(StringKey.ErrorCodeYarr), NLog.LogLevel.Error);
+            //     Logger.Info(FileUtils.ListAllFiles(converter.InstallPath));
+            //     return false;
+            // }
 
             Instance.RaiseProgressChanged(ResourceHelper.Get(StringKey.CreatingMissingRequiredDirectories));
             converter.CreateMissingDirectories();
@@ -463,6 +463,7 @@ namespace AppUI.Classes
                 Sys.FFNxConfig.Backup(true);
                 Sys.FFNxConfig.OverrideInternalKeys(debug);
                 Sys.FFNxConfig.Save();
+
             }
 
             //
