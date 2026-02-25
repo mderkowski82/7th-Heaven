@@ -35,6 +35,7 @@ jobs:
     timeout-minutes: 1440
     permissions:
       contents: write
+      packages: write
     strategy:
       max-parallel: 1
     steps:
@@ -78,6 +79,7 @@ jobs:
     - name: VirusTotal Scan
       id: vt-scan
       if: env._IS_GITHUB_RELEASE == 'true' && success()
+      continue-on-error: true
       uses: crazy-max/ghaction-virustotal@v4
       with:
         vt_api_key: ${{ secrets._VT_API_KEY }}
